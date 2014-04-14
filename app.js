@@ -4,17 +4,15 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var swig = require('swig');
-var consolidate = require('consolidate');
 
 var app = express();
 
 // configuration
 
 var views = __dirname + '/views';
-swig.init({ root: views, allowErrors: true });
 
 app.configure(function(){
-	app.engine('.html', consolidate.swig);
+	app.engine('.html', swig.renderFile);
 	app.set('view engine', 'html');
 	app.set('views', views);
 	app.set('port', process.env.PORT || 3000);
